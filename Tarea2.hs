@@ -24,26 +24,51 @@ suma_entre m n
 	| otherwise = m + (suma_entre (m+1) n)
 
 --1.
---suma_entre 2 5 = ...
+{--
+suma_entre 2 5 = 14
+
+
+2 + (suma entre (2+1) 5)
+2 + (3 + (suma entre (3+1) 5) ) =
+2 + (3 + (4 + (suma entre (4+1) 5))  =
+2 + (3 + (4 + (5 + (suma entre (5+1) 5))
+2 + (3 + (4 + (5 + (0))) = 14
+--}
+
 
 --2.
 {--
-Es bien fundada porque...
+Es bien fundada porque... porque se trabaja y se hace recursion sobre intervalos (existe un principio y un fin). 
 
-El tamaño del problema que decrece es...
+El tamaño del problema que decrece es... que m va aumentando (aumentando el extemo inferior) y el extremo superior hacia n
+se va "achicando" hasta solaparse y cumplir el caso base.
 --}
+
 
 --3.
 suma_entre' :: N -> N -> N
-suma_entre' m n = undefined
+suma_entre' m n
+	| m > n = 0
+	| otherwise = (suma_entre' m (n-1)) + n
+
 
 --4.
 suma_entre_f :: (N -> N) -> N -> N -> N
-suma_entre_f f m n = undefined
+suma_entre_f f m n
+	| m > n = 0
+	| otherwise = suma_entre_f f m (n-1) + f (n)
+
+
+-- para testear suma_entre_f
+doble :: N -> N
+doble 0 = 0
+doble k = (doble (k-1)) + 2
+
 
 --5.
 suma_i :: N -> N
-suma_i n = undefined
+suma_i n = suma_entre_f (\x -> x) n 0
+
 
 --------------
 --PROBLEMA 2--
