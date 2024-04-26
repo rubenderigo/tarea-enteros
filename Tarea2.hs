@@ -76,11 +76,20 @@ suma_i n = suma_entre_f (\x -> x) n 0
 
 --1.
 es_divisor :: N -> N -> Bool
-es_divisor n k = undefined
+es_divisor n k
+	| n == k || k == 0 = True
+	| n < k = False
+	| n > k = es_divisor (n-k) k
 
 --2.
 primer_divisor :: N -> N
-primer_divisor n = undefined
+primer_divisor n =
+	let buscarDivisor k
+			| k > n = n
+			| es_divisor n k = k
+			| otherwise = buscarDivisor (k + 1)
+	in buscarDivisor 2
+ 
 
 --3.
 es_primo :: N -> Bool
