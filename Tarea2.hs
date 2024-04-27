@@ -109,12 +109,13 @@ minimo_acotado p m n
 
 --1.
 {--
-Si ningun valor en el intervalo considerado cumple el predicado, entonces...
+Si ningun valor en el intervalo considerado cumple el predicado, entonces... la funcion retorna m ya que se 'cae' en el
+primer caso base (solaparse).
 --}
 
 --2.
 primer_divisor' :: N -> N
-primer_divisor' n = undefined
+primer_divisor' n = minimo_acotado .. 2 n
 
 --3.
 maximo_acotado :: (N -> Bool) -> N -> N -> N
