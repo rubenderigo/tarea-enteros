@@ -115,11 +115,19 @@ primer caso base (solaparse).
 
 --2.
 primer_divisor' :: N -> N
-primer_divisor' n = minimo_acotado .. 2 n
+primer_divisor' n = minimo_acotado (es_divisor n) 2 n
 
 --3.
 maximo_acotado :: (N -> Bool) -> N -> N -> N
-maximo_acotado p m n = undefined
+maximo_acotado p m n
+	| m > n = n
+	| m <= n && p n = n
+	| m <= n && not (p n) = maximo_acotado p m (n-1)
+
+-- para testear maximo_acotado
+par :: N -> Bool
+par 0 = True
+par n = not (par (n-1))
 
 --4.
 minimo_p :: (N -> Bool) -> N -> N
@@ -128,7 +136,7 @@ minimo_p p n
 	| not (p n) = minimo_p p (n+1)
 
 {--
-Esta función termina si...
+Esta función termina si... se cumple el predicado con el valor de n que se encuentre.
 --}
 
 --------------
