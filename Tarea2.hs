@@ -145,27 +145,45 @@ Esta función termina si... se cumple el predicado con el valor de n que se encu
 
 --1.
 cantidad_p :: (N -> Bool) -> N -> N -> N
-cantidad_p p m n = undefined
+cantidad_p p m n
+	| m > n = 0
+	| m <= n && p m = (cantidad_p p (m+1) n) + 1
+	| m <= n && not (p m) = cantidad_p p (m+1) n
 
 --2.
 suma_p :: (N -> Bool) -> N -> N -> N
-suma_p p m n = undefined
+suma_p p m n
+	| m > n = 0
+	| m <= n && p m = (suma_p p (m+1) n) + m
+	| m <= n && not (p m) = suma_p p (m+1) n
 
 --3.
 suma2_p :: (N -> Bool) -> N -> N -> N
-suma2_p p m n = undefined
+suma2_p p m n
+	| m > n = 0
+	| m <= n && p m = (suma2_p p (m+1) n) + (m^2)
+	| m <= n && not (p m) = suma2_p p (m+1) n
 
 --4.
 sumaf_p :: (N -> Bool) -> (N -> N) -> N -> N -> N
-sumaf_p p f m n = undefined
+sumaf_p p f m n
+	| m > n = 0
+	| m <= n && p m = (sumaf_p p f (m+1) n) + f m
+	| m <= n && not (p m) = sumaf_p p f (m+1) n
 
 --5.
 todos_p :: (N -> Bool) -> N -> N -> Bool
-todos_p p m n = undefined
+todos_p p m n
+	| m > n = True
+	| m <= n && not (p m) = False
+	| m <= n && p m = todos_p p (m+1) n
 
 --5.
 existe_p :: (N -> Bool) -> N -> N -> Bool
-existe_p p m n = undefined
+existe_p p m n
+	| m > n = False
+	| m <= n && p m = True
+	| m <= n && not (p m) = existe_p p (m+1) n
 
 -------
 --FIN--
