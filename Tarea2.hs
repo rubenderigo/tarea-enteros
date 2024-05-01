@@ -38,10 +38,12 @@ suma_entre 2 5 = 14
 
 --2.
 {--
-Es bien fundada porque... porque se trabaja y se hace recursion sobre intervalos (existe un principio y un fin). 
+Es bien fundada porque... porque se trabaja y se hace recursion sobre intervalos, uno que se 'achica' (garantizando
+que la ejecucion va a terminar) y otro que 'aumenta'.
 
-El tamaño del problema que decrece es... que m va aumentando (aumentando el extemo inferior) y el extremo superior hacia n
-se va "achicando" hasta solaparse y cumplir el caso base.
+
+El tamaño del problema que decrece es... que m va aumentando (aumentando el extemo inferior) y el extremo superior 
+hacia n se va "achicando" hasta solaparse y cumplir el caso base.
 --}
 
 
@@ -69,6 +71,7 @@ doble k = (doble (k-1)) + 2
 suma_i :: N -> N
 suma_i n = suma_entre_f (\x -> x) n 0
 
+-- utilizamos la funcion anomina '(\x -> x)' como parametro de suma_entre_f para obtener la identidad.
 
 --------------
 --PROBLEMA 2--
@@ -85,10 +88,12 @@ es_divisor n k
 
 --2.
 primer_divisor :: N -> N
-primer_divisor n 
-	| es_divisor n 2 = 2
-	| es_divisor n 3 = 3
-	| es_divisor n n = n
+primer_divisor n =
+	let buscarDivisor k
+			| k > n = n
+			| es_divisor n k = k
+			| otherwise = buscarDivisor (k + 1)
+	in buscarDivisor 2
 
 
 --3.
