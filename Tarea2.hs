@@ -38,8 +38,8 @@ suma_entre 2 5 = 14
 
 --2.
 {--
-Es bien fundada porque... porque se trabaja y se hace recursion sobre intervalos, uno que se 'achica' (garantizando
-que la ejecucion va a terminar) y otro que 'aumenta'.
+Es bien fundada porque... porque se trabaja y se hace recursion sobre intervalos, donde 
+uno que se 'achica' (garantizando que la ejecucion va a terminar) y otro que aumenta.
 
 
 El tamaño del problema que decrece es... que m va aumentando (aumentando el extemo inferior) y el extremo superior 
@@ -80,8 +80,8 @@ suma_i n = suma_entre_f (\x -> x) n 0
 --1.
 es_divisor :: N -> N -> Bool
 es_divisor n k
+	| k == 0 = error "no es posible dividir entre 0"
 	| n == k = True
-	| k == 0 = False
 	| n < k = False
 	| n > k = es_divisor (n-k) k
 
@@ -114,13 +114,15 @@ minimo_acotado p m n
 
 --1.
 {--
-Si ningun valor en el intervalo considerado cumple el predicado, entonces... la funcion retorna m ya que se 'cae' en el
-primer caso base (solaparse).
+Si ningun valor en el intervalo considerado cumple el predicado, entonces... la funcion retorna m ya que se 'cae' 
+en el primer caso base (solaparse).
 --}
+
 
 --2.
 primer_divisor' :: N -> N
 primer_divisor' n = minimo_acotado (es_divisor n) 2 n
+
 
 --3.
 maximo_acotado :: (N -> Bool) -> N -> N -> N
@@ -133,6 +135,7 @@ maximo_acotado p m n
 par :: N -> Bool
 par 0 = True
 par n = not (par (n-1))
+
 
 --4.
 minimo_p :: (N -> Bool) -> N -> N
